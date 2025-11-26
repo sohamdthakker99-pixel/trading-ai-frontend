@@ -1,9 +1,11 @@
 import { useState } from "react";
+import Chart from "../components/Chart";
 
 export default function Home() {
   const [activePanel, setActivePanel] = useState(null);
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
+  const [currentTicker, setCurrentTicker] = useState("BTC");
 
   async function sendMessage() {
     const r = await fetch("https://trading-ai-backend-8yb4.onrender.com/chat", {
@@ -29,7 +31,7 @@ export default function Home() {
         background: "#0d0d0d",
       }}
     >
-      {/* ==== TRADINGVIEW CHART LAYER ==== */}
+      {/* ==== CHART LAYER - Now using Lightweight Charts ==== */}
       <div
         id="chart-container"
         style={{
@@ -41,17 +43,7 @@ export default function Home() {
           height: "100%",
         }}
       >
-        <iframe
-          src="https://s.tradingview.com/widgetembed/?frameElementId=tv_chart&symbol=NASDAQ:AAPL&interval=60&theme=dark"
-          style={{
-            width: "100%",
-            maxWidth: "100%",
-            height: "100%",
-            border: "none",
-            display: "block",
-            overflow: "hidden",
-          }}
-        />
+        <Chart ticker={currentTicker} />
       </div>
 
       {/* ==== ICON DOCK ==== */}
@@ -119,8 +111,6 @@ export default function Home() {
           color: "white",
         }}
       >
-        {/* ==== PANEL CONTENTS ==== */}
-
         {activePanel === "chat" && (
           <>
             <h2>AI Assistant</h2>
@@ -177,6 +167,25 @@ export default function Home() {
           <>
             <h2>Watchlist</h2>
             <p>Your saved stocks go here.</p>
+            <div style={{ marginTop: "12px" }}>
+              {["BTC", "ETH", "SOL", "AAPL"].map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setCurrentTicker(t)}
+                  style={{
+                    margin: "4px",
+                    padding: "8px 16px",
+                    background: currentTicker === t ? "#2962ff" : "#222",
+                    border: "none",
+                    borderRadius: "4px",
+                    color: "white",
+                    cursor: "pointer",
+                  }}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
           </>
         )}
 
