@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 const TickerContext = createContext();
 
 export function TickerProvider({ children }) {
-  const [currentTicker, setCurrentTicker] = useState("BTC");
+  const [currentTicker, setCurrentTicker] = useState("AAPL");
   return (
     <TickerContext.Provider value={{ currentTicker, setCurrentTicker }}>
       {children}
