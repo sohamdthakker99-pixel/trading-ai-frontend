@@ -25,19 +25,33 @@ export default function Home() {
   };
 
   return (
-    <div style={{ background: "#0d0d0d", height: "100vh" }}>
+    <div style={{
+      position: "relative",
+      width: "100vw",
+      height: "100vh",
+      overflow: "hidden",
+      background: "#0d0d0d"
+    }}>
 
-      {/* TRADINGVIEW FULL SCREEN */}
+      {/* TRADINGVIEW CHART */}
       <iframe
         src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=NASDAQ:AAPL&interval=60&theme=dark"
-        style={{ width: "100%", height: "100%", border: "none" }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          border: "none",
+          zIndex: 1
+        }}
       />
 
       {/* ICON DOCK */}
-      <div className="icon-dock">
+      <div className="icon-dock" style={{ zIndex: 5 }}>
         <div className="icon-btn" onClick={() => openPanel("chat")}>💬</div>
         <div className="icon-btn" onClick={() => openPanel("news")}>📰</div>
-        <div className="icon-btn" onClick={() => openPanel("watch")}>⭐</div>
+        <div className="icon-btn" onClick={() => openPanel("watchlist")}>⭐</div>
         <div className="icon-btn" onClick={() => openPanel("portfolio")}>📊</div>
         <div className="icon-btn" onClick={() => openPanel("agent")}>🤖</div>
         <div className="icon-btn" onClick={() => openPanel("memory")}>🧠</div>
@@ -85,35 +99,28 @@ export default function Home() {
         </div>
       </div>
 
-      {/* NEWS PANEL */}
+      {/* OTHER PANELS */}
       <div className={`slide-panel ${activePanel === "news" ? "open" : ""}`}>
         <h2>News</h2>
-        <p>Live market news coming soon...</p>
+        <p>Market news will appear here.</p>
       </div>
 
-      {/* WATCHLIST */}
-      <div className={`slide-panel ${activePanel === "watch" ? "open" : ""}`}>
+      <div className={`slide-panel ${activePanel === "watchlist" ? "open" : ""}`}>
         <h2>Watchlist</h2>
-        <p>Manage your tickers here.</p>
       </div>
 
-      {/* PORTFOLIO */}
       <div className={`slide-panel ${activePanel === "portfolio" ? "open" : ""}`}>
         <h2>Portfolio</h2>
-        <p>Your positions will appear here.</p>
       </div>
 
-      {/* AGENT STATUS */}
       <div className={`slide-panel ${activePanel === "agent" ? "open" : ""}`}>
         <h2>Agent Monitor</h2>
-        <p>Your agent status will appear here.</p>
       </div>
 
-      {/* MEMORY */}
       <div className={`slide-panel ${activePanel === "memory" ? "open" : ""}`}>
         <h2>Stock Memory</h2>
-        <p>All remembered information goes here.</p>
       </div>
+
     </div>
   );
 }
