@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Chart from "../components/Chart";
 
+import { useTicker } from "../hooks/useTicker";
 export default function Home() {
   const [activePanel, setActivePanel] = useState(null);
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
-  const [currentTicker, setCurrentTicker] = useState("BTC");
-
+  const { currentTicker, setCurrentTicker } = useTicker();
   async function sendMessage() {
     const r = await fetch("https://trading-ai-backend-8yb4.onrender.com/chat", {
       method: "POST",
