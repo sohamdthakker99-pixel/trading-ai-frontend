@@ -25,30 +25,44 @@ export default function Home() {
   };
 
   return (
-    <div style={{
-      position: "relative",
-      width: "100vw",
-      height: "100vh",
-      overflow: "hidden",
-      background: "#0d0d0d"
-    }}>
+    <div
+      id="app-wrapper"
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        overflow: "hidden",
+        background: "#0d0d0d"
+      }}
+    >
 
-      {/* TRADINGVIEW CHART */}
-      <iframe
-        src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=NASDAQ:AAPL&interval=60&theme=dark"
+      {/* CHART LAYER */}
+      <div
+        id="chart-container"
         style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          border: "none",
-          zIndex: 1
+          inset: 0,
+          zIndex: 1,
+          overflow: "hidden",
+          width: "100%",
+          height: "100%"
         }}
-      />
+      >
+        <iframe
+          src="https://s.tradingview.com/widgetembed/?frameElementId=tv_chart&symbol=NASDAQ:AAPL&interval=60&theme=dark"
+          style={{
+            width: "100%",
+            maxWidth: "100%",
+            height: "100%",
+            border: "none",
+            display: "block",
+            overflow: "hidden"
+          }}
+        />
+      </div>
 
       {/* ICON DOCK */}
-      <div className="icon-dock" style={{ zIndex: 5 }}>
+      <div className="icon-dock">
         <div className="icon-btn" onClick={() => openPanel("chat")}>💬</div>
         <div className="icon-btn" onClick={() => openPanel("news")}>📰</div>
         <div className="icon-btn" onClick={() => openPanel("watchlist")}>⭐</div>
